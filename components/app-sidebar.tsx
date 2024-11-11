@@ -1,4 +1,4 @@
-import { History, Home, Blocks, Search, Settings, Currency } from "lucide-react"
+import { History, Home, Blocks, Settings, Currency } from "lucide-react"
 
 import {
     Sidebar,

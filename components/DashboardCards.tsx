@@ -1,10 +1,10 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import React from 'react';
 
-interface DashboardCardProps {
-    title: string;
-    amount: string;
-}
+// interface DashboardCardProps {
+//     title: string;
+//     amount: string;
+// }
 
 const cardData = [
     {
