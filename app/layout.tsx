@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Offline POS",
+  title: "Square POS",
   description: "An offline point of sale system.",
 };
 

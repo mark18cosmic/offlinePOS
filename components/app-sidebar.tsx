@@ -1,4 +1,4 @@
-import { History, Home, Blocks, Settings, Currency } from "lucide-react"
+import { History, Home, Blocks, Settings, Currency, Square } from "lucide-react"
 
 import {
     Sidebar,
@@ -45,7 +45,7 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent className="mt-12">
                 <SidebarGroup className="flex flex-col gap-12">
-                    <SidebarGroupLabel className="font-semibold text-xl">Offline POS</SidebarGroupLabel>
+                    <SidebarGroupLabel className="font-semibold text-xl"><Square/> Square POS</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu className="flex flex-col gap-3">
                             {items.map((item) => (
