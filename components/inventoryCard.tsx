@@ -14,7 +14,8 @@ const InventoryCard = () => {
               <p className="text-xl font-sembibold">{data.title}</p>
               <p className={data.stock === "Out of Stock" ? "text-red-500 font-semibold" : "text-black"}>
                 {data.stock}
-            </p>            </CardContent>
+            </p>
+            </CardContent>
           </Card>
         ))}
       </div>  )
