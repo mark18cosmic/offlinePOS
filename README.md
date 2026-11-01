@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Simple POS
 
-## Getting Started
+A simple point of sale for a small takeaway shop. Tap items, tap how the customer paid, done.
+It runs locally on SQLite: no accounts or cloud services needed.
 
-First, run the development server:
+## Run it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. The database (`data/pos.db`) and sample items are created on first start.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Role | Username | Password |
+|---|---|---|
+| Admin | `admin` | `admin123` |
+| Cashier | `cashier` | `cashier123` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Change both passwords on the Staff page before real use.
 
-## Learn More
+For a real shop, run `npm run build` then `npm start`. Without HTTPS (for example on a local network), start it with
+`INSECURE_COOKIES=1 npm start` so sign-in works.
 
-To learn more about Next.js, take a look at the following resources:
+## Vercel demo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The app deploys to Vercel as a demo only. Vercel's disk is temporary, so sales and edits disappear whenever
+the server restarts, and it starts again from the sample items. For a real shop, run it on one machine as above.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## What each role gets
 
-## Deploy on Vercel
+- **Cashier:** Sell screen and their own sales today, with receipts.
+- **Admin:** also live Reports (sales, employees, items, cash in register, past days), Items, Staff and Settings.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Petty cash** is the starting cash in the register. The admin sets it each day on Reports. If they don't, it uses the
+default from Settings. Reports shows petty cash + cash sales as what should be in the register.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Giving change:** tapping Cash asks how much the customer handed over and shows the change to give. It warns if the register may not hold enough, and saves the amounts on the receipt and in Reports.
+
+**The More card** on the Sell screen holds items marked as hidden. They are recorded and reported like any other sale.
+
+## Handy commands
+
+- `npm run user -- <username> <password> [admin|cashier] "Full Name"` creates an account or resets a password.
+- Back up the shop's data by copying the `data/` folder while the app is stopped.
