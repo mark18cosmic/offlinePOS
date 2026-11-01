@@ -6,13 +6,8 @@ create table if not exists users (
   password_hash text not null,
   role text not null default 'cashier' check (role in ('admin', 'cashier')),
   is_active integer not null default 1, -- removed staff stay in the data so old reports keep their names
+  session_version integer not null default 0, -- raising it signs this person out everywhere
   created_at text not null
-);
-
-create table if not exists sessions (
-  token_hash text primary key,
-  user_id integer not null references users on delete cascade,
-  expires_at text not null
 );
 
 create table if not exists settings (

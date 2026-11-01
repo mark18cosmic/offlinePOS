@@ -97,16 +97,17 @@ export async function resetPassword(id: number, input: PasswordInput): Promise<A
   await requireAdmin();
   const parsed = passwordSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
-  db.prepare("update users set password_hash = ? where id = ?").run(hashPassword(parsed.data.password), id);
-  db.prepare("delete from sessions where user_id = ?").run(id);
+  db.prepare("update users set password_hash = ?, session_version = session_version + 1 where id = ?").run(
+    hashPassword(parsed.data.password),
+    id,
+  );
   return { ok: true };
 }
 
 /** Signs a cashier out and blocks their login. Their past sales stay in reports. */
 export async function removeCashier(id: number): Promise<ActionResult> {
   await requireAdmin();
-  db.prepare("update users set is_active = 0 where id = ? and role = 'cashier'").run(id);
-  db.prepare("delete from sessions where user_id = ? and user_id in (select id from users where is_active = 0)").run(id);
+  db.prepare("update users set is_active = 0, session_version = session_version + 1 where id = ? and role = 'cashier'").run(id);
   refresh();
   return { ok: true };
 }

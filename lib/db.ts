@@ -26,7 +26,8 @@ export function saveUser(
          full_name = excluded.full_name,
          password_hash = excluded.password_hash,
          role = excluded.role,
-         is_active = 1`,
+         is_active = 1,
+         session_version = session_version + 1`,
     )
     .run(user.username, user.fullName, hashPassword(user.password), user.role, new Date().toISOString());
 }

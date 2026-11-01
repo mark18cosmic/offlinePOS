@@ -27,6 +27,9 @@ For a real shop, run `npm run build` then `npm start`. Without HTTPS (for exampl
 The app deploys to Vercel as a demo only. Vercel's disk is temporary, so sales and edits disappear whenever
 the server restarts, and it starts again from the sample items. For a real shop, run it on one machine as above.
 
+Set an `AUTH_SECRET` environment variable on Vercel (any long random string) so logins work across its servers.
+Sales made in the demo may not appear on every page, because each page can run on a server with its own temporary data.
+
 ## What each role gets
 
 - **Cashier:** Sell screen and their own sales today, with receipts.
